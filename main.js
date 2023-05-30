@@ -32,6 +32,7 @@ function agregarAlCarrito(e) {
 
     agregarItemCarrito(newItem);
     actualizarNumerito(); // Agregado: Actualizar el numerito del carrito
+    alert("¡Producto agregado al carrito!"); 
 }
 
 function agregarItemCarrito(newItem) {
@@ -107,6 +108,7 @@ function eliminarElementoCarrito(e) {
     tr.remove();
     calcularTotalCarrito();
     actualizarNumerito(); // Agregado: Actualizar el numerito del carrito
+    alert("¡Producto eliminado del carrito!"); 
 }
 
 function actualizarCantidad(e) {
