@@ -118,13 +118,17 @@ function actualizarCantidad(e) {
 
     elementosCarrito.forEach(item => {
         if (item.title.trim() === title.trim()) {
-            quantityInput.value < 1 ? (quantityInput.value = 1) : quantityInput.value;
-            item.cantidad = quantityInput.value;
+            let newQuantity = parseInt(quantityInput.value, 10); // Convertir el valor a un número entero
+            if (newQuantity < 1) {
+                newQuantity = 1; // Asegurarse de que la cantidad mínima sea 1
+            }
+            item.cantidad = newQuantity;
             calcularTotalCarrito();
             actualizarNumerito(); // Agregado: Actualizar el numerito del carrito
         }
     });
 }
+
 
 function guardarLocalStorage() {
     localStorage.setItem('cartItems', JSON.stringify(elementosCarrito));
@@ -137,14 +141,12 @@ function actualizarBotonesAgregar() {
         boton.addEventListener("click", agregarAlCarrito);
     });
 }
-
 function actualizarNumerito() {
     const numerito = document.getElementById('numerito-1');
-    const productosEnCarrito = JSON.parse(localStorage.getItem('cartItems')) || [];
-    let nuevoNumerito = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0);
+    elementosCarrito = JSON.parse(localStorage.getItem('cartItems')) || []; // Obtener los elementos del carrito almacenados en el localStorage
+    let nuevoNumerito = elementosCarrito.reduce((acc, producto) => acc + producto.cantidad, 0); // Sumar la cantidad de cada producto en el carrito
     numerito.innerText = nuevoNumerito;
 }
-
 
 
 
