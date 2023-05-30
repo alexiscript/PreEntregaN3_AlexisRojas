@@ -6,6 +6,16 @@ botones.forEach(btn => {
     btn.addEventListener('click', agregarAlCarrito);
 });
 
+window.onload = function () {
+    const storage = JSON.parse(localStorage.getItem('cartItems'));
+    if (storage) {
+        elementosCarrito = storage;
+        mostrarElementosCarrito();
+    }
+    actualizarBotonesAgregar(); // Agregado: Actualizar los botones de agregar al carrito
+    actualizarNumerito(); // Agregado: Actualizar el numerito del carrito
+};
+
 function agregarAlCarrito(e) {
     const button = e.target;
     const item = button.closest('.card');
@@ -132,18 +142,6 @@ function actualizarNumerito() {
     let nuevoNumerito = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0);
     numerito.innerText = nuevoNumerito;
 }
-
-window.onload = function () {
-    const storage = JSON.parse(localStorage.getItem('cartItems'));
-    if (storage) {
-        elementosCarrito = storage;
-        mostrarElementosCarrito();
-    }
-    actualizarBotonesAgregar(); // Agregado: Actualizar los botones de agregar al carrito
-    actualizarNumerito(); // Agregado: Actualizar el numerito del carrito
-};
-
-
 
 
 
